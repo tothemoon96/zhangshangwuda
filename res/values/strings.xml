@@ -130,4 +130,5 @@
     <string name="start_tabs_ringer">定时静音</string>
     <string name="theme_tabs_light">白版</string>
     <string name="theme_tabs_black">黑版</string>
+    <string name="coursephototidy">课程照片整理</string>
 </resources>

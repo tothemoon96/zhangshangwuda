@@ -114,7 +114,8 @@
         <activity android:name=".lessons.LessonsFragmentSupport" />
         <activity android:name=".lessons.LessonsDayActivity" />
         <activity android:name=".lessons.LessonsInfoActivity" />
-
+        <activity android:name=".lessons.LessonsCoursePhotoTidyActivity" />
+        
         <receiver
             android:name=".lessons.widget.LessonsWidgetProvider_4_2"
             android:label="@string/Lessons_widget_4_2" >

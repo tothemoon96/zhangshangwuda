@@ -40,6 +40,7 @@ public class LessonsFragmentSupport extends BaseSherlockFragment {
 	private static final int MENU_ADD = Menu.FIRST + 1;
 	private static final int MENU_TODAY = Menu.FIRST + 2;
 	private static final int MENU_COURSES=Menu.FIRST+3;
+	private static final int MENU_COURSESPHOTOTIDY=Menu.FIRST+4;
 	private static MyApplication application;
 	private boolean lessonsHave;
 	private String sWeekFormat;
@@ -76,6 +77,12 @@ public class LessonsFragmentSupport extends BaseSherlockFragment {
 				.setShowAsAction(
 						MenuItem.SHOW_AS_ACTION_IF_ROOM
 								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menu.add(Menu.NONE, MENU_COURSESPHOTOTIDY, 5,
+				getResources().getString(R.string.coursephototidy))
+				.setIcon(R.drawable.camera)
+				.setShowAsAction(
+						MenuItem.SHOW_AS_ACTION_IF_ROOM
+								| MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 	}
 
 	@Override
@@ -101,6 +108,11 @@ public class LessonsFragmentSupport extends BaseSherlockFragment {
 			Intent intent2 = new Intent();
 			intent2.setClass(getActivity(), LessonsManagementActivity.class);
 			getActivity().startActivity(intent2);
+			return true;
+		case MENU_COURSESPHOTOTIDY:
+			Intent intent3 = new Intent();
+			intent3.setClass(getActivity(), LessonsCoursePhotoTidyActivity.class);
+			getActivity().startActivity(intent3);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
