@@ -131,4 +131,10 @@
     <string name="theme_tabs_light">白版</string>
     <string name="theme_tabs_black">黑版</string>
     <string name="coursephototidy">课程照片整理</string>
+    
+    <!-- Find -->
+    <string name="function">拓展功能</string>
+    <string name="tab_find">发现</string>
+    <string name="Find">发现</string>
+    
 </resources>

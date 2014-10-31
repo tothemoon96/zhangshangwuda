@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import zq.whu.zhangshangwuda.db.LessonsDb;
-import zq.whu.zhangshangwuda.ui.MainActivity;
+import zq.whu.zhangshangwuda.tools.SettingSharedPreferencesTool;
+import zq.whu.zhangshangwuda.ui.MainActivityTAB;
+import zq.whu.zhangshangwuda.ui.R;
+import zq.whu.zhangshangwuda.views.toast.ToastUtil;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -13,9 +16,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
-import zq.whu.zhangshangwuda.ui.R;
-import zq.whu.zhangshangwuda.views.toast.ToastUtil;
 
 public class RingerTools 
 {
@@ -23,10 +25,14 @@ public class RingerTools
 	private AudioManager mAudioManager;
 	private NotificationManager mNotificationManager;
 	private Context context;
+	private SharedPreferences preferences;
+	private SharedPreferences.Editor editor;
 	
 	public RingerTools(Context ctx)
 	{
 		this.context = ctx;
+		preferences = context.getSharedPreferences("Data", Context.MODE_WORLD_READABLE);
+		editor = preferences.edit();
 	}
 	
 	public void initAlarmManager()
@@ -86,7 +92,7 @@ public class RingerTools
 		return times;
 	}
 	
-	public void setTimeOfSilent(boolean mu)
+	public boolean setTimeOfSilent(boolean mu)
 	{
 		Intent intent_off = new Intent(context, OffSilentReceiver.class);
 		intent_off.putExtra("isAfter", "no");
@@ -99,7 +105,7 @@ public class RingerTools
 		if (times == null || times.size() == 0)
 		{
 			ToastUtil.showToast((Activity)context, "需要登陆课程表功能才能用的 0 0");
-			return;
+			return false;
 		}
 		
 		if (mu)
@@ -152,6 +158,7 @@ public class RingerTools
 			}
 			cleanNotification(1);
 		}
+		return true;
 	}
 	
 	/**
@@ -160,13 +167,26 @@ public class RingerTools
 	 */
 	public void setSilent(boolean mu)
 	{
+		String RingerMode = SettingSharedPreferencesTool.getRingerMode(context);
 		if (mu)
 		{
-			mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+			editor.putInt("modebefore", mAudioManager.getRingerMode());
+			editor.commit();
+			System.out.println("mode ===>" + SettingSharedPreferencesTool.getRingerAfterMode(context));
+			if (RingerMode.equals("silent"))
+				mAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+			else
+				mAudioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
 		}
 		else
 		{
-			mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+			String RingerAfterMode = SettingSharedPreferencesTool.getRingerAfterMode(context);
+			if (RingerAfterMode.equals("normal"))
+				mAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+			else if (RingerAfterMode.equals("vibrate"))
+				mAudioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+			else
+				mAudioManager.setRingerMode(preferences.getInt("modebefore", AudioManager.RINGER_MODE_NORMAL));
 		}
 	}
 	
@@ -180,7 +200,7 @@ public class RingerTools
 		notification.flags = Notification.FLAG_ONGOING_EVENT;
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		
-		Intent notificationIntent = new Intent(context, MainActivity.class);
+		Intent notificationIntent = new Intent(context, MainActivityTAB.class);
 		notificationIntent.putExtra("page", "ringer");
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);
@@ -217,7 +237,7 @@ public class RingerTools
 		notification.flags = Notification.FLAG_ONGOING_EVENT;
 		notification.flags = Notification.FLAG_NO_CLEAR;
 		
-		Intent notificationIntent = new Intent(context, MainActivity.class);
+		Intent notificationIntent = new Intent(context, MainActivityTAB.class);
 		notificationIntent.putExtra("page", "ringer");
 		PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 		notification.setLatestEventInfo(context, contentTitle, contentText, contentIntent);

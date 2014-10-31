@@ -5,11 +5,11 @@ import java.util.Calendar;
 import zq.whu.zhangshangwuda.base.BaseSherlockFragment;
 import zq.whu.zhangshangwuda.base.PreferenceHelper;
 import zq.whu.zhangshangwuda.tools.LessonsTool;
-import zq.whu.zhangshangwuda.ui.MainActivity;
+import zq.whu.zhangshangwuda.ui.MainActivityTAB;
 import zq.whu.zhangshangwuda.ui.MyApplication;
 import zq.whu.zhangshangwuda.ui.R;
+import zq.whu.zhangshangwuda.ui.find.FindContentActivity;
 import zq.whu.zhangshangwuda.views.toast.ToastUtil;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,10 +26,18 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.umeng.analytics.MobclickAgent;
 
-@SuppressLint("WorldReadableFiles") public class RingerFragmentSupport extends BaseSherlockFragment
+public class RingerFragmentSupport extends BaseSherlockFragment
 {
+	private final int MENU_GROUP = 1;
+	private final int MENU_SETTING = Menu.FIRST;
+	private final int MENU_HELP = Menu.FIRST + 1;
+	private final int MENU_FEEDBACK = Menu.FIRST + 2;
+	private final int MENU_ABOUT = Menu.FIRST + 3;
+	
 	private static final String mpagename = "RingerFragment";
 	private View rootView;
 	private SeekBar seekBar_hour, seekBar_min;
@@ -43,6 +51,12 @@ import com.umeng.analytics.MobclickAgent;
 	
 	private int after_time_hour = 0;
 	private int after_time_min = 0;
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) 
+	{
+
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -67,7 +81,8 @@ import com.umeng.analytics.MobclickAgent;
 	{
 		super.onActivityCreated(savedInstanceState);
 		int nowWeek = LessonsTool.getNowWeek(getActivity());
-		MainActivity.MainActivityActionbar.setSubtitle("第" + nowWeek + "周");
+		FindContentActivity.FindActivityActionBar.setSubtitle("第" + nowWeek + "周");
+		FindContentActivity.FindActivityActionBar.setTitle(R.string.Ringer);
 		init();
 	}
 	
@@ -134,9 +149,6 @@ import com.umeng.analytics.MobclickAgent;
 			long time = System.currentTimeMillis() - set_time;  //已经经历的时间
 			int past_hour = (int)(time/(60 * 60 * 1000));
 			int past_min = (int)((time - past_hour * 60 * 60 * 1000)/(60 * 1000));
-			
-			System.out.println("past_hour--->" + past_hour);
-			System.out.println("past_min--->" + past_min);
 			
 			seekBar_hour.setProgress(set_hour - past_hour);
 			seekBar_min.setProgress(set_min - past_min);
@@ -223,7 +235,10 @@ import com.umeng.analytics.MobclickAgent;
 //						Toast.LENGTH_SHORT).show();
 				editor.putBoolean("ringer_check", arg1);
 				editor.commit();
-				rt.setTimeOfSilent(arg1);
+				if (!rt.setTimeOfSilent(arg1))
+				{
+					set_auto_time.setChecked(false);
+				}
 			}
 		});
 	}
