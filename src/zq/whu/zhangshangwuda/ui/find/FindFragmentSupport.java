@@ -9,6 +9,7 @@ import zq.whu.zhangshangwuda.ui.MainActivityTAB;
 import zq.whu.zhangshangwuda.ui.MyApplication;
 import zq.whu.zhangshangwuda.ui.R;
 import zq.whu.zhangshangwuda.ui.SettingActivity;
+import zq.whu.zhangshangwuda.ui.bus.BusFragmentSupport;
 import zq.whu.zhangshangwuda.ui.ringer.RingerFragmentSupport;
 import zq.whu.zhangshangwuda.views.FindLinearLayout;
 import android.content.Intent;
@@ -39,7 +40,7 @@ public class FindFragmentSupport extends BaseSherlockFragment
 	/**
 	 * 用TAB来区分你的新功能
 	 */
-	public static String[] TABS = {"RINGER"};
+	public static String[] TABS = {"RINGER","BUS"};
 	
 	/**
 	 * 添加else就好
@@ -51,6 +52,8 @@ public class FindFragmentSupport extends BaseSherlockFragment
 		if (TAB.equals(TABS[0]))
 		{
 			return new RingerFragmentSupport();
+		} else if (TAB.equals(TABS[1])){
+			return new BusFragmentSupport();
 		}
 		
 		return null;
@@ -59,6 +62,7 @@ public class FindFragmentSupport extends BaseSherlockFragment
 	private void addContents()
 	{
 		addContent("  定时静音", TABS[0], R.drawable.ringer_tab_light, R.drawable.ringer_tab_dark);
+		addContent("  校车定位",TABS[1] ,R.drawable.bus_tab_light,R.drawable.bus_tab_dark);
 		//Add your Fragment here.
 	}
 	

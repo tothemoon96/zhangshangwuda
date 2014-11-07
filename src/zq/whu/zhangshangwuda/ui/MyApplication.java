@@ -2,23 +2,22 @@ package zq.whu.zhangshangwuda.ui;
 
 import java.io.File;
 
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.utils.StorageUtils;
-
 import zq.whu.zhangshangwuda.tools.Constants;
-import zq.whu.zhangshangwuda.tools.LessonsTool;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public final class MyApplication extends Application {
 
@@ -110,6 +109,7 @@ public final class MyApplication extends Application {
 		//lessonsWeek = LessonsTool.getNowWeek(this);
 		initImageLoader();
 		initAvatarSize();
+		SDKInitializer.initialize(getApplicationContext());  
 	}
 
 	private void initImageLoader() {
