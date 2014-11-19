@@ -26,6 +26,7 @@
     <string name="Refresh_Done_Tip">刷新成功啦~</string>
     <string name="No_Intenert_Tip">那个、网络不行了，请救救他吧</string>
     <string name="No_Cache_Tip">我什么也没记住哦</string>
+    <string name="Bus_Status_0_Tip">那个、出了一点小问题。。我们正在全力抢救</string>
     <string name="Load_More_Tip">又加载了%1$d条消息啦~</string>
     <string name="No_Lessons_Tip">请先添加或导入课程哦~</string>
     <!-- News -->
@@ -137,14 +138,14 @@
     
     <!-- Bus -->
     <string name="action_settings">Settings</string>
-    <string name="gong_men">当前路线：工学部校车（牌坊-工学部体育馆）</string>
+    <string name="gong">当前路线：工学部校车（牌坊-工学部体育馆）</string>
     <string name="gong_shi">当前路线：工学部校车（工学部体育馆-牌坊）</string>
-    <string name="wen_men">当前路线：文理学部校车（牌坊-湖滨）</string>
+    <string name="wen">当前路线：文理学部校车（牌坊-湖滨）</string>
     <string name="wen_hu">当前路线：文理学部校车（湖滨-牌坊）</string>
     <string name="daxunhuan">当前路线：大循环校车（信息学部二食堂-湖滨-信息学部二食堂）</string>
-    <string name="detail_wen_men">校大门-教五、教四-未名湖-樱园-人文馆-政管院-行政楼-枫园-经管院-法院、外院-湖滨</string>
+    <string name="detail_wen">校大门-教五、教四-未名湖-樱园-人文馆-政管院-行政楼-枫园-经管院-法院、外院-湖滨</string>
     <string name="detail_wen_hu">湖滨-标本楼、新闻学院-樱园-未名湖-教五、教四-校大门</string>
-    <string name="detail_gong_men">校大门-化院、教五、教四-桂园-世纪广场-工学部宿舍-工学部体育馆</string>
+    <string name="detail_gong">校大门-化院、教五、教四-桂园-世纪广场-工学部宿舍-工学部体育馆</string>
     <string name="detail_gong_shi">工学部体育馆-工学部宿舍-世纪广场-桂园-化院、教五、教四-校大门</string>
     <string name="detail_daxunhuan">信息学部二食堂-青楼-校医院、图书馆-行政楼、珞珈山庄-枫园-经管院-法院、外院-湖滨-标本楼-工学部宿舍
 	    -世纪广场-桂园-化院、教五、教四-校大门-信息学部教工家属区-国软、信息学部二食堂  </string>

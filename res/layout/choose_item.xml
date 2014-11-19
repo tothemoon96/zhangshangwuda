@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/choose_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false" >
+
+        <TextView
+            android:id="@+id/choose_busline_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="24sp" />
+
+        <ImageView
+            android:id="@+id/choose_dropBtn"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:focusableInTouchMode="false"
+            android:orientation="horizontal"
+			android:scaleType="center"
+            android:src="@drawable/btn_down_1"
+            android:textColor="#489c47"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/choose_busline_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F3F3F3"
+        android:textColor="#858680"
+        android:textSize="22sp"
+        android:visibility="gone" />
+
+</LinearLayout>

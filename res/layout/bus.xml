@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="@string/gong_men"
+                android:text="@string/gong"
                 android:textSize="20dp" />
 
             <ImageButton
@@ -54,6 +54,7 @@
             android:layout_below="@id/main_bar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:orientation="vertical" >
 
             <TextView
@@ -90,10 +91,11 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <FrameLayout
+    <ListView
         android:id="@+id/chooseFL"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </FrameLayout>
+        android:layout_height="match_parent" 
+        android:visibility="gone">
+    </ListView>
 
 </RelativeLayout>
