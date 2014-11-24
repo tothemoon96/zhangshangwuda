@@ -81,6 +81,9 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		return rootView;
 	}
 
+	/**
+	 * 初始化地图
+	 */
 	private void initMap() {
 		mapView = (MapView) rootView.findViewById(R.id.bmapView);
 		baiduMap = mapView.getMap();
@@ -89,14 +92,11 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		MapStatusUpdate update = MapStatusUpdateFactory.newMapStatus(status);
 		baiduMap.setMapStatus(update);
 
-		if (BuildConfig.DEBUG) {
-			OverlayOptions circle = new CircleOptions()
-					.center(ConstantPos.jianhu).radius(10)
-					.stroke(new Stroke(3, 0xffff0000)).fillColor(0xffff0000);
-			baiduMap.addOverlay(circle);
-		}
 	}
 
+	/**
+	 * 初始化各个控件
+	 */
 	private void initView() {
 
 		mainBar = (RelativeLayout) rootView
@@ -124,6 +124,11 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		chooseList.setOnItemClickListener(this);
 	}
 
+	/**
+	 * 根据客户端的线路id返回route_Id用于向服务器查询
+	 * @param lineId 
+	 * @return
+	 */
 	private int getRouteFromLineId(int lineId){
 		switch (lineId){
 		case 0:return 2;
@@ -133,6 +138,7 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		}
 	}
 	
+	
 	private Handler handler = new Handler() {
 
 		@Override
@@ -141,7 +147,7 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 			
 			switch (msg.what) {
 			
-			case NET_FAILL:
+			case NET_FAILL://网络问题
 				if (BuildConfig.DEBUG) {
 					System.out.println("NET_FAILL");
 				}
@@ -149,12 +155,12 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 						Toast.LENGTH_LONG);
 				break;
 			
-			case BUS_UPDATE:
+			case BUS_UPDATE://正常更新
 				JSONArray busList = (JSONArray) msg.obj;
 				busListUpdate(msg.arg1, busList);
 				break;
 			
-			case BUS_STATUS_0:
+			case BUS_STATUS_0://返回数据status为0
 				if (BuildConfig.DEBUG) {
 					System.out.println("BUS_STATUS_0");
 				}
@@ -339,7 +345,10 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		if (timer != null){
 			timer.cancel();
 		} 
-		timer.schedule(new BusPostion(getActivity(), getRouteFromLineId(position)),0,5000);
+		timer = new Timer(true);
+		timer.schedule(new BusPostion(getActivity(), position),0,5000);
 	}
+	
+	
 
 }
