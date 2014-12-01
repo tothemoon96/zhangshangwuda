@@ -10,7 +10,7 @@ public class Data_gong_shitang {
 	public static List<LatLng> gong_shitang = new ArrayList<LatLng>();
 	
 	public static void init(){
-		gong_shitang.add(new LatLng(30.549802,114.372676));
+		gong_shitang.add(new LatLng(30.549275,114.372755));	
 		gong_shitang.add(new LatLng(30.549253,114.372762));
 		gong_shitang.add(new LatLng(30.549183,114.372151));
 		gong_shitang.add(new LatLng(30.549094,114.371235));
@@ -44,6 +44,6 @@ public class Data_gong_shitang {
 		gong_shitang.add(new LatLng(30.542539,114.366716));
 		gong_shitang.add(new LatLng(30.542236,114.366581));
 		gong_shitang.add(new LatLng(30.541742,114.366402));
-		gong_shitang.add(new LatLng(30.541318,114.366272));
+		gong_shitang.add(new LatLng(30.540803,114.365982));
 		};
 }

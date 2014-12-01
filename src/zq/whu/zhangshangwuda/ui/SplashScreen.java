@@ -88,9 +88,9 @@ public class SplashScreen extends Activity {
 			mHandler.sendEmptyMessageDelayed(SWITCH_GUIDACTIVITY, 2000);
 		else
 		{
-			if (BuildConfig.DEBUG) {
+/*			if (BuildConfig.DEBUG) {
 				XGPushConfig.enableDebug(getApplicationContext(), true);
-			} else
+			} else*/
 				XGPushConfig.enableDebug(getApplicationContext(), false);
 			XGPushManager.registerPush(getApplicationContext());
 			getWindow().setBackgroundDrawable(null);

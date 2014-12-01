@@ -12,16 +12,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ChooseBusLineAdapter extends BaseAdapter  {
-	
-	private int lineName[] = { R.string.gong, 	R.string.wen,  R.string.daxunhuan };
-	private int lineDetail[] = { R.string.detail_gong,	R.string.detail_wen, R.string.detail_daxunhuan };
-	private LayoutInflater mInflater;
-	private int chooseNumber = 0;
+public class ChooseBusLineAdapter extends BaseAdapter {
 
-	public ChooseBusLineAdapter(Context context) {
+	private int lineName[] = { R.string.gong_men, R.string.gong_shi,
+			R.string.wen_men, R.string.wen_hu, R.string.daxunhuan };
+	private int lineDetail[] = { R.string.detail_gong_men,
+			R.string.detail_gong_shi, R.string.detail_wen_men,
+			R.string.detail_wen_hu, R.string.detail_daxunhuan };
+	private LayoutInflater mInflater;
+
+	public ChooseBusLineAdapter(LayoutInflater mInflater) {
 		super();
-		mInflater = LayoutInflater.from(context);
+		this.mInflater = mInflater;
 	}
 
 	@Override
@@ -43,7 +45,6 @@ public class ChooseBusLineAdapter extends BaseAdapter  {
 		TextView mline;
 		TextView mDetail;
 		ImageView drop;
-		LinearLayout lineLayout;
 	}
 
 	@Override
@@ -58,8 +59,7 @@ public class ChooseBusLineAdapter extends BaseAdapter  {
 					.findViewById(R.id.choose_busline_detail);
 			holder.drop = (ImageView) convertView
 					.findViewById(R.id.choose_dropBtn);
-			holder.lineLayout = (LinearLayout)convertView.findViewById(R.id.choose_line);
-					convertView.setTag(holder);
+			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -71,6 +71,7 @@ public class ChooseBusLineAdapter extends BaseAdapter  {
 			public void onClick(View arg0) {
 				if (BuildConfig.DEBUG)
 					System.out.println("choose paper drop button is clicked");
+				
 				if (holder.mDetail.getVisibility() == View.GONE) {
 					holder.mDetail.setVisibility(View.VISIBLE);
 					holder.drop.setImageResource(R.drawable.btn_drop_1);

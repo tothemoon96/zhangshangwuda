@@ -9,8 +9,8 @@ public class Data_daxunhuan {
 
 	public static List<LatLng> daxunhuan = new ArrayList<LatLng>();
 	
-	public static void init(){
-		daxunhuan.add(new LatLng(30.533130,114.364902));		
+	public static  void init(){
+		daxunhuan.add(new LatLng(30.533128,114.364904));
 		daxunhuan.add(new LatLng(30.533126,114.365256));
 		daxunhuan.add(new LatLng(30.533115,114.366002));
 		daxunhuan.add(new LatLng(30.533118,114.366968));
@@ -129,7 +129,7 @@ public class Data_daxunhuan {
 		daxunhuan.add(new LatLng(30.534052,114.364170));
 		daxunhuan.add(new LatLng(30.533383,114.364102));
 		daxunhuan.add(new LatLng(30.533208,114.364080));
-		daxunhuan.add(new LatLng(30.533126,114.364879));
+		daxunhuan.add(new LatLng(30.533128,114.364904));
 	};
 	
 }
