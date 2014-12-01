@@ -84,11 +84,20 @@ public class SplashScreen extends Activity {
 
 		boolean mFirst = isFirstEnter(SplashScreen.this, SplashScreen.this
 				.getClass().getName());
+<<<<<<< HEAD
 		if (mFirst)
 			mHandler.sendEmptyMessageDelayed(SWITCH_GUIDACTIVITY, 2000);
 		else
 		{
 /*			if (BuildConfig.DEBUG) {
+=======
+//去掉引导页
+//		if (mFirst)
+//			mHandler.sendEmptyMessageDelayed(SWITCH_GUIDACTIVITY, 2000);
+//		else
+//		{
+			if (BuildConfig.DEBUG) {
+>>>>>>> master
 				XGPushConfig.enableDebug(getApplicationContext(), true);
 			} else*/
 				XGPushConfig.enableDebug(getApplicationContext(), false);
@@ -98,7 +107,7 @@ public class SplashScreen extends Activity {
 			timer = new Timer(true);
 			startTime = System.currentTimeMillis();
 			timer.schedule(task, 0, 1);
-		}
+//		}
 
 	}
 
