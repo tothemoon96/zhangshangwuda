@@ -84,7 +84,6 @@ public class SplashScreen extends Activity {
 
 		boolean mFirst = isFirstEnter(SplashScreen.this, SplashScreen.this
 				.getClass().getName());
-<<<<<<< HEAD
 		if (mFirst)
 			mHandler.sendEmptyMessageDelayed(SWITCH_GUIDACTIVITY, 2000);
 		else
@@ -107,7 +106,7 @@ public class SplashScreen extends Activity {
 			timer = new Timer(true);
 			startTime = System.currentTimeMillis();
 			timer.schedule(task, 0, 1);
-//		}
+			}
 
 	}
 
