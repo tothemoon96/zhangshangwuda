@@ -10,6 +10,7 @@ public class Data_daxunhuan {
 	public static List<LatLng> daxunhuan = new ArrayList<LatLng>();
 	
 	public static  void init(){
+		if (daxunhuan != null) daxunhuan.clear();
 		daxunhuan.add(new LatLng(30.533128,114.364904));
 		daxunhuan.add(new LatLng(30.533126,114.365256));
 		daxunhuan.add(new LatLng(30.533115,114.366002));

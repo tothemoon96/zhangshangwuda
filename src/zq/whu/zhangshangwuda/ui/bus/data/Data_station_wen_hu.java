@@ -10,6 +10,9 @@ public class Data_station_wen_hu {
 	public static List<String> stationName = new ArrayList<String>();
 	
 	public static void init() {
+		if (station != null) station.clear();
+		if (stationName != null) stationName.clear();
+		
 		stationName.add("湖滨");
 		stationName.add("新传、历史学院");
 		stationName.add("樱园");

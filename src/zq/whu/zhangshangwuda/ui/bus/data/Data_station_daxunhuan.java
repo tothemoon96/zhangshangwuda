@@ -10,6 +10,8 @@ public class Data_station_daxunhuan {
 	public static List<String> stationName = new ArrayList<String>();
 	
 	public static void init() {
+		if (station != null) station.clear();
+		if (stationName != null) stationName.clear();
 		stationName.add("信息学部二食堂");
 		stationName.add("信息学部青楼");
 		stationName.add("武大附中");

@@ -10,6 +10,7 @@ public class Data_wenli_hubin {
 	public static List<LatLng> wenli_hubin = new ArrayList<LatLng>();
 	
 	public static void init()	{
+		if (wenli_hubin != null) wenli_hubin.clear();
 		wenli_hubin.add(new LatLng(30.547646 ,114.377202));	 
 		wenli_hubin.add(new LatLng(30.547535,114.376638));
 		wenli_hubin.add(new LatLng(30.547570,114.376445));

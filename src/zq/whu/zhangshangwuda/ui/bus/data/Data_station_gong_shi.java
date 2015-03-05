@@ -10,6 +10,9 @@ public class Data_station_gong_shi {
 	public static List<String> stationName = new ArrayList<String>();
 	
 	public static void init() {
+		if (station != null) station.clear();
+		if (stationName != null) stationName.clear();
+		
 		stationName.add("工学部食堂、体育场");
 		stationName.add("工学部网球场");
 		stationName.add("工学部教学楼");

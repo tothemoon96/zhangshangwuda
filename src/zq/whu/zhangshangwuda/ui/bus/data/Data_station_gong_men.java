@@ -10,6 +10,8 @@ public class Data_station_gong_men {
 	public static List<String> stationName = new ArrayList<String>();
 	
 	public static void init() {
+		if (station != null) station.clear();
+		if (stationName != null) stationName.clear();
 		stationName.add("校门");
 		stationName.add("教五、教四、化院");
 		stationName.add("桂园、计院");

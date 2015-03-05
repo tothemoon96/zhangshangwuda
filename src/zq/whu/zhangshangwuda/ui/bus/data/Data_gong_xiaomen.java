@@ -10,6 +10,7 @@ public class Data_gong_xiaomen {
 	public static List<LatLng> gong_xiaomen = new ArrayList<LatLng>();
 	
 	public static  void init()	{
+		if (gong_xiaomen != null) gong_xiaomen.clear();
 		gong_xiaomen.add(new LatLng(30.540768 ,114.366063));	
 		gong_xiaomen.add(new LatLng(30.541458,114.366438));
 		gong_xiaomen.add(new LatLng(30.541707,114.366523));

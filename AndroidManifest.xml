@@ -43,7 +43,7 @@
         android:theme="@style/MyLightTheme" >
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="a7reijj0ztAyKK8hMAT32U0l" />
+            android:value="STR7pmMvFaFmbOWZlEt1Smcs" />
 
         <!-- 信鸽的配置项目 -->
         <receiver

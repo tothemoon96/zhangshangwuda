@@ -10,6 +10,7 @@ public class Data_gong_shitang {
 	public static List<LatLng> gong_shitang = new ArrayList<LatLng>();
 	
 	public static void init(){
+		if (gong_shitang != null) gong_shitang.clear();
 		gong_shitang.add(new LatLng(30.549275,114.372755));	
 		gong_shitang.add(new LatLng(30.549253,114.372762));
 		gong_shitang.add(new LatLng(30.549183,114.372151));

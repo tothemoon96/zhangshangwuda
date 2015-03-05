@@ -10,6 +10,7 @@ public class Data_wenli_xiaomen {
 	public static List<LatLng> wenli_xiaomen = new ArrayList<LatLng>();
 		
 	public static void init(){
+		if (wenli_xiaomen != null) wenli_xiaomen.clear();
 		wenli_xiaomen.add(new LatLng(30.540768 ,114.366063));	
 		wenli_xiaomen.add(new LatLng(30.541462,114.366447));
 		wenli_xiaomen.add(new LatLng(30.542279,114.366703));
