@@ -39,7 +39,7 @@
     <string name="Wifi_strInputPasswordHint">输入密码吧</string>
     <string name="Wifi_strAccountInputLabel">帐  号</string>
     <string name="Wifi_strPasswordInputLabel">密  码</string>
-    <string name="Wifi_logout">注销</string>
+    <string name="Wifi_logout">下线</string>
     <string name="Wifi_login">登录</string>
     <string name="Wifi_Exit">退出程序</string>
     <string name="Wifi_Detail">查看详情</string>

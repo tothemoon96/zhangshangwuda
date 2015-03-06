@@ -258,8 +258,8 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		changeLine = (Button) rootView.findViewById(R.id.lineChange);
 		changeLine.setOnClickListener(this);
 
-		stationRemind = (Button) rootView.findViewById(R.id.stationRemind);
-		stationRemind.setOnClickListener(this);
+/*		stationRemind = (Button) rootView.findViewById(R.id.stationRemind);
+		stationRemind.setOnClickListener(this);*/
 
 		remindShow = (TextView) rootView.findViewById(R.id.remindShow);
 
@@ -449,12 +449,12 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 			showChoosePaper();
 			break;
 
-		case R.id.stationRemind:
+/*		case R.id.stationRemind:
 			if (menuBar.getVisibility() == View.VISIBLE) {
 				menuBar.setVisibility(View.GONE);
 				dropBtn.setImageResource(R.drawable.btn_drop_1);
 			}
-			break;
+			break;*/
 
 		case R.id.firstChoose:
 			showChoosePaper();
