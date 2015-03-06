@@ -15,7 +15,7 @@ public class Data_station_gong_shi {
 		
 		stationName.add("工学部食堂、体育场");
 		stationName.add("工学部网球场");
-		stationName.add("工学部教学楼");
+		//stationName.add("工学部教学楼");
 		stationName.add("世纪广场");
 		stationName.add("桂园、计院");
 		stationName.add("教五、教四、化院");
@@ -23,7 +23,7 @@ public class Data_station_gong_shi {
 
 		station.add(new LatLng(30.549275, 114.372755)); // 工学部食堂、体育场
 		station.add(new LatLng(30.548287, 114.370329)); // 工学部网球场
-		station.add(new LatLng(30.549111, 114.367976)); // 工学部教学楼
+		//station.add(new LatLng(30.549111, 114.367976)); // 工学部教学楼
 		station.add(new LatLng(30.548108, 114.366646)); // 世纪广场
 		station.add(new LatLng(30.544885, 114.364935)); // 桂园、计院
 		station.add(new LatLng(30.54277, 114.366974)); // 教五、教四、化院

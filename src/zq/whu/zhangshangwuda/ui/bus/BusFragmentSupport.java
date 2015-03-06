@@ -38,6 +38,8 @@ import zq.whu.zhangshangwuda.ui.bus.data.Data_wenli_hubin;
 import zq.whu.zhangshangwuda.ui.bus.data.Data_wenli_xiaomen;
 import zq.whu.zhangshangwuda.views.toast.ToastUtil;
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
@@ -102,8 +104,9 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 
 	private Map<String, Marker> busMarkers = new HashMap<String, Marker>();
 	private List<List<LatLng>> lineLoc = new ArrayList<List<LatLng>>();
-	private List<LatLng> stationLoc = null;
-	private List<String> stationName = null;
+	private List<List<LatLng>> stationLoc = new ArrayList<List<LatLng>>();
+	private List<List<String>> stationName = new ArrayList<List<String>>();
+	private List<LatLng> lineCentre = new ArrayList<LatLng>();
 
 	static Activity mActivity;
 	static BusFragmentSupport mFragment;
@@ -137,9 +140,13 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		manager = getChildFragmentManager();
 		mActivity = getActivity();
 		mFragment = this;
+		
+		getLineId();
+		
 		Data_daxunhuan.init();
 		Data_gong_shitang.init();
 		Data_gong_xiaomen.init();
@@ -151,23 +158,39 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		lineLoc.add(Data_wenli_hubin.wenli_hubin);
 		lineLoc.add(Data_daxunhuan.daxunhuan);
 		
-		System.out.println(Environment.getExternalStorageDirectory());
-		System.out.println(Environment.getExternalStorageDirectory().getAbsolutePath());
-		String str = "初始数据\n";
-		str = str + lineLoc.get(0).toString();
-		try {
-			FileWriter fw = new FileWriter(file, true);
-			fw.write(str);
-			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		Data_station_daxunhuan.init();
 		Data_station_gong_men.init();
 		Data_station_gong_shi.init();
 		Data_station_wen_hu.init();
 		Data_station_wen_men.init();
+		stationLoc.add(Data_station_gong_men.station);
+		stationLoc.add(Data_station_gong_shi.station);
+		stationLoc.add(Data_station_wen_men.station);
+		stationLoc.add(Data_station_wen_hu.station);
+		stationLoc.add(Data_station_daxunhuan.station);
+		stationName.add(Data_station_gong_men.stationName);
+		stationName.add(Data_station_gong_shi.stationName);
+		stationName.add(Data_station_wen_men.stationName);
+		stationName.add(Data_station_wen_hu.stationName);
+		stationName.add(Data_station_daxunhuan.stationName);
+		
+		lineCentre.add(ConstantPos.gongxuebu_centre);
+		lineCentre.add(ConstantPos.gongxuebu_centre);
+		lineCentre.add(ConstantPos.wenli_centre);
+		lineCentre.add(ConstantPos.wenli_centre);
+		lineCentre.add(ConstantPos.daxunhuan_centre);
+	}
+
+	private void getLineId() {
+		SharedPreferences sp = mActivity.getSharedPreferences("busProperty", Activity.MODE_PRIVATE);
+		lineId = sp.getInt(KEY_lineId, -1);
+	}
+	
+	private void storeLineId() {
+		SharedPreferences sp = mActivity.getSharedPreferences("busProperty", Activity.MODE_PRIVATE);
+		Editor editor = sp.edit();
+		editor.putInt(KEY_lineId, lineId);
+		editor.commit();
 	}
 
 	@Override
@@ -177,8 +200,7 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		rootView = inflater.inflate(R.layout.bus, container, false);
 		initMap();
 		initView();
-		if (savedInstanceState != null) {
-			lineId = savedInstanceState.getInt(KEY_lineId);
+		if (lineId != -1) {
 			busMarkers.clear();
 			baiduMap.clear();
 			drawLine(lineId);
@@ -199,11 +221,6 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		return rootView;
 	}
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
-
 	/**
 	 * 初始化地图
 	 */
@@ -211,7 +228,7 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		mapView = (MapView) rootView.findViewById(R.id.bmapView);
 		baiduMap = mapView.getMap();
 		MapStatus status = new MapStatus.Builder(baiduMap.getMapStatus())
-				.target(ConstantPos.jianhu).zoom(16).build();
+				.target(ConstantPos.daxunhuan_centre).zoom(16).build();
 		MapStatusUpdate update = MapStatusUpdateFactory.newMapStatus(status);
 		baiduMap.setMapStatus(update);
 
@@ -486,39 +503,15 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 	}
 
 	private void drawLine(int lineId) {
-		switch (lineId) {
-		case 0:
-			//lineLoc = Data_gong_xiaomen.gong_xiaomen;
-			stationLoc = Data_station_gong_men.station;
-			stationName = Data_station_gong_men.stationName;
-			break;
-		case 1:
-			//lineLoc = Data_gong_shitang.gong_shitang;
-			stationLoc = Data_station_gong_shi.station;
-			stationName = Data_station_gong_shi.stationName;
-			break;
-		case 2:
-			//lineLoc = Data_wenli_xiaomen.wenli_xiaomen;
-			stationLoc = Data_station_wen_men.station;
-			stationName = Data_station_wen_men.stationName;
-			break;
-		case 3:
-			//lineLoc = Data_wenli_hubin.wenli_hubin;
-			stationLoc = Data_station_wen_hu.station;
-			stationName = Data_station_wen_hu.stationName;
-			break;
-		case 4:
-			//lineLoc = Data_daxunhuan.daxunhuan;
-			stationLoc = Data_station_daxunhuan.station;
-			stationName = Data_station_daxunhuan.stationName;
-			break;
-		}
+
 		busLineShow.setText(lineName[lineId]);
 
-		System.out.println("lineID ="+lineId);
-		//for (int i = 0; i < lineLoc.size(); i++) System.out.print(lineLoc.get(i)+" ");
-		//System.out.println(lineLoc);
-		String str = "画线\n";
+		MapStatus status = new MapStatus.Builder(baiduMap.getMapStatus())
+									.target(lineCentre.get(lineId)).zoom(16).build();
+		MapStatusUpdate update = MapStatusUpdateFactory.newMapStatus(status);
+		baiduMap.setMapStatus(update);
+		
+		/*String str = "画线\n";
 		str = str + lineLoc.get(0).toString();
 		try {
 			FileWriter fw = new FileWriter(file, true);
@@ -526,30 +519,30 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 			fw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		OverlayOptions way = new PolylineOptions().color(colorList[lineId])
-				.points(lineLoc.get(lineId)).width(10);
+											.points(lineLoc.get(lineId)).width(10);
 		baiduMap.addOverlay(way);
 
 		Bundle bs = new Bundle();
-		bs.putString("station", stationName.get(0));
+		bs.putString("station", stationName.get(lineId).get(0));
 		OverlayOptions startPoint = new MarkerOptions().icon(finalPoint)
-				.position(stationLoc.get(0)).zIndex(9).extraInfo(bs);
+											.position(stationLoc.get(lineId).get(0)).zIndex(9).extraInfo(bs);
 		baiduMap.addOverlay(startPoint);
 
 		Bundle be = new Bundle();
-		be.putString("station", stationName.get(stationName.size() - 1));
+		be.putString("station", stationName.get(lineId).get(stationName.size() - 1));
 		OverlayOptions endPoint = new MarkerOptions().icon(finalPoint)
-				.position(stationLoc.get(stationLoc.size() - 1)).zIndex(9)
-				.extraInfo(be);
+															.position(stationLoc.get(lineId).get(stationLoc.get(lineId).size() - 1))
+															.zIndex(9)	.extraInfo(be);
 		baiduMap.addOverlay(endPoint);
 
-		for (int i = 1; i < stationLoc.size() - 1; i++) {
+		for (int i = 1; i < stationLoc.get(lineId).size() - 1; i++) {
 			Bundle b = new Bundle();
-			b.putString("station", stationName.get(i));
+			b.putString("station", stationName.get(lineId).get(i));
 			OverlayOptions oo = new MarkerOptions().icon(stationNotReach)
-					.position(stationLoc.get(i)).zIndex(9).extraInfo(b);
+					.position(stationLoc.get(lineId).get(i)).zIndex(9).extraInfo(b);
 			baiduMap.addOverlay(oo);
 		}
 	}
@@ -557,6 +550,9 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 	@Override
 	public boolean onMarkerClick(Marker marker) {
 		TextView info = new TextView(getActivity());
+		info.setTextSize(18);
+		info.setTextColor(0xffff7700);
+		//info.setBackgroundColor(0xff000000);
 		String infoStr = marker.getExtraInfo().getString("station");
 		if (infoStr != null) {
 			info.setText(infoStr);
@@ -585,17 +581,12 @@ public class BusFragmentSupport extends BaseSherlockFragment implements
 		finalPoint.recycle();
 		busIcon.recycle();
 		stationNotReach.recycle();
-		Bundle outState = new Bundle();
-		outState.putInt(KEY_lineId, lineId);
-		onSaveInstanceState(outState);
+		storeLineId();
 	}
 
 	@Override
 	public void onPause() {
 		mapView.onPause();
-		Bundle outState = new Bundle();
-		outState.putInt(KEY_lineId, lineId);
-		onSaveInstanceState(outState);
 		super.onPause();
 	}
 
